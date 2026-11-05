@@ -7,43 +7,55 @@
 <meta name="description" content="Rashada is for Muslims and those interested in Islam who live in a globalised, connected world. Teachings from Arab scholars, made clear and simple.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
-  /* Palette A: Desert Dawn. Light is the default; dark mode is pitch black. */
+  /* Bold variant. Palette A base, with the four tile colours used across the page. */
   :root {
     --bg: #FBF1E6;
-    --surface: #F5EEE4;
     --text: #3B2219;
+    --muted: #6E4A3C;
     --accent: #B4552D;
-    --muted: #7A5446;
     --rule: rgba(59, 34, 25, 0.16);
+    --band: #F6C89F;
+    --band-grad: linear-gradient(180deg, #E08A5E 0%, #E08A5E 14%, #F3E3CC 100%);
+    --band-text: #3B2219;
     --icon-bg: #1A110D;
     --icon-fg: #FBF1E6;
-    --serif-display: "Playfair Display", Georgia, "Times New Roman", serif;
-    --sans-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    --serif: "Playfair Display", Georgia, "Times New Roman", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    --logo-ar: #C9643A;
+    --logo-en: #9A4524;
   }
 
   :root[data-theme="dark"] {
     --bg: #000000;
-    --surface: #0E0A08;
     --text: #F6E7D8;
-    --accent: #E8A07A;
     --muted: #C9B2A2;
+    --accent: #E8A07A;
     --rule: rgba(246, 231, 216, 0.16);
+    --band: #14100D;
+    --band-grad: linear-gradient(180deg, #9A4524 0%, #9A4524 14%, #000000 100%);
+    --band-text: #F6E7D8;
     --icon-bg: #F6E7D8;
     --icon-fg: #000000;
+    --logo-ar: #E08A5E;
+    --logo-en: #E8A07A;
   }
 
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
       --bg: #000000;
-      --surface: #0E0A08;
       --text: #F6E7D8;
-      --accent: #E8A07A;
       --muted: #C9B2A2;
+      --accent: #E8A07A;
       --rule: rgba(246, 231, 216, 0.16);
+      --band: #14100D;
+    --band-grad: linear-gradient(180deg, #9A4524 0%, #9A4524 14%, #000000 100%);
+      --band-text: #F6E7D8;
       --icon-bg: #F6E7D8;
       --icon-fg: #000000;
+      --logo-ar: #E08A5E;
+      --logo-en: #E8A07A;
     }
   }
 
@@ -54,370 +66,482 @@
     padding: 0;
     background: var(--bg);
     color: var(--text);
-    font-family: var(--sans-body);
-    font-size: 19px;
-    line-height: 1.7;
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.65;
   }
 
   a { color: var(--accent); text-decoration: none; }
   a:hover { text-decoration: underline; }
 
-  .wrap { max-width: 680px; margin: 0 auto; padding: 0 1.25rem; }
-  .wrap.wide { max-width: 900px; }
+  .container { max-width: 1040px; margin: 0 auto; padding: 0 1.25rem; }
 
-  /* Header */
-  header.site {
-    padding: 2.25rem 0 1.5rem;
-    border-bottom: 1px solid var(--rule);
+  /* Top bar */
+  .topbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
+    padding: 1.4rem 0;
   }
-
-  .logo { display: flex; align-items: center; gap: 0.9rem; color: var(--text); text-decoration: none; }
-  .logo:hover { text-decoration: none; }
-  .logo svg.wordmark { height: 192px; width: auto; flex: none; display: block; }
-  .logo .word {
-    font-family: var(--serif-display);
-    font-size: 1.9rem;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    line-height: 1;
-  }
-  .logo .greeting {
-    display: block;
-    font-family: var(--sans-body);
-    font-size: 0.85rem;
-    color: var(--muted);
-    letter-spacing: 0.02em;
-    margin-top: 0.25rem;
-  }
-
-  .header-right { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
-  .header-right a { color: var(--text); font-size: 0.95rem; }
-  .header-right a:hover { color: var(--accent); }
+  .topbar nav { display: flex; gap: 1.4rem; align-items: center; }
+  .topbar nav a { color: var(--text); font-family: var(--serif); font-size: 1.2rem; font-weight: 700; }
+  .topbar nav a:hover { color: var(--accent); text-decoration: none; }
 
   .theme-toggle {
     background: none;
     border: 1px solid var(--rule);
     color: var(--text);
-    font-family: var(--sans-body);
-    font-size: 0.9rem;
-    padding: 0.35rem 0.8rem;
+    font-family: var(--sans);
+    font-size: 1.05rem;
+    font-weight: 700;
+    padding: 0.4rem 1rem;
     border-radius: 999px;
     cursor: pointer;
   }
-  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
 
-  /* Hero */
-  .hero { padding: 3.5rem 0 2.5rem; }
+  /* Hero with centred logo */
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+  .theme-toggle svg {
+    width: 16px;
+    height: 16px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* Light button: light background, dark sun and text. Dark button: pitch black, light moon and text. */
+  .theme-toggle.to-light { background: #FBF1E6; color: #3B2219; border-color: #3B2219; }
+  .theme-toggle.to-dark { background: #000000; color: #FBF1E6; border-color: #000000; }
+
+  .hero {
+    text-align: center;
+    padding: 2.5rem 0 3.5rem;
+  }
+
+  .logo-big svg { height: 180px; width: auto; display: inline-block; }
+  .logo-big path:nth-child(-n+6) { fill: var(--logo-ar); }
+  .logo-big path:nth-child(n+7) { fill: var(--logo-en); }
+
   .hero h1 {
-    font-family: var(--serif-display);
-    font-size: 2.5rem;
-    line-height: 1.2;
-    margin: 0 0 1rem;
-    font-weight: 700;
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: 3.3rem;
+    line-height: 1.08;
+    margin: 2rem auto 1rem;
+    max-width: 780px;
   }
-  .hero p { margin: 0; color: var(--muted); }
 
-  /* Four cards */
-  .cards {
+  .hero p {
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .hero p.meaning {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.3rem;
+    line-height: 1.5;
+    color: var(--text);
+    margin: 1.5rem auto 0;
+    max-width: 640px;
+  }
+
+  /* Staggered tiles */
+  .tiles {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-    gap: 0.9rem;
-    margin: 0 0 2.5rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.2rem;
+    align-items: start;
+    margin: 0 0 4rem;
   }
 
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--rule);
-    border-radius: 24px;
-    padding: 1.1rem;
+  .tile {
+    border-radius: 28px;
     aspect-ratio: 1 / 1;
+    padding: 1.4rem;
     display: flex;
     flex-direction: column;
+    color: var(--tile-text);
+    background: var(--tile-bg);
+    --tile-text: #3B2219;
+    --tile-muted: #5A3A2C;
+    --tile-eyebrow: #7A3A1C;
   }
 
-  .icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
+  .tile:nth-child(1) { --tile-bg: #F6C89F; }
+  .tile:nth-child(2) { --tile-bg: #C9643A; --tile-text: #FFF8F0; --tile-muted: #FBE3D2; --tile-eyebrow: #FFF8F0; }
+  .tile:nth-child(3) { --tile-bg: #9A4524; --tile-text: #FFF8F0; --tile-muted: #F5DCCB; --tile-eyebrow: #F6C89F; }
+  .tile:nth-child(4) { --tile-bg: #E08A5E; --tile-text: #2A1610; --tile-muted: #4A2A1E; --tile-eyebrow: #2A1610; }
+
+  .tile h2.big { font-size: 2.1rem; font-weight: 900; line-height: 1.05; margin: 0 0 0.6rem; }
+  .tile .action {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--tile-eyebrow);
+    margin: 0 0 0.5rem;
+  }
+
+  .tile .icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
     background: var(--icon-bg);
     color: var(--icon-fg);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 0.7rem;
+    margin-bottom: auto;
   }
-  .icon svg { width: 22px; height: 22px; }
+  .tile .icon svg { width: 22px; height: 22px; }
 
-  .eyebrow {
-    font-size: 0.78rem;
+  .tile .eyebrow {
+    font-size: 0.72rem;
     font-weight: 700;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--accent);
-    margin: 0 0 0.35rem;
+    color: var(--tile-eyebrow);
+    margin: 0 0 0.3rem;
   }
 
-  .card h2 {
-    font-family: var(--serif-display);
-    font-size: 1.2rem;
-    line-height: 1.2;
-    margin: 0 0 0.4rem;
+  .tile h2 {
+    font-family: var(--serif);
     font-weight: 700;
+    font-size: 1.35rem;
+    line-height: 1.15;
+    margin: 0 0 0.5rem;
+    color: var(--tile-text);
   }
 
-  .card p { margin: 0 0 0.6rem; color: var(--muted); font-size: 0.88rem; line-height: 1.45; }
+  .tile p {
+    font-size: 0.9rem;
+    line-height: 1.45;
+    color: var(--tile-muted);
+    margin: 0 0 0.6rem;
+    font-weight: 400;
+  }
 
-  .card .more { margin-top: auto; font-weight: 700; color: var(--text); font-size: 1rem; }
-  .card .more:hover { color: var(--accent); }
+  .tile .more { font-weight: 700; color: var(--tile-text); font-size: 0.92rem; }
 
-  /* Blog */
-  section.blog { padding-bottom: 3rem; }
+  /* Blog band */
+  .band {
+    background: var(--band-grad);
+    color: var(--band-text);
+    border-radius: 32px;
+    padding: 3rem 2.5rem;
+    margin-bottom: 4rem;
+  }
 
-  .blog-head {
+  .band-head {
     display: flex;
-    align-items: center;
-    gap: 0.9rem;
-    border-bottom: 1px solid var(--rule);
-    padding-bottom: 1rem;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1.5rem;
+    flex-wrap: wrap;
     margin-bottom: 1.5rem;
   }
-  .blog-head .icon { margin: 0; width: 48px; height: 48px; border-radius: 12px; }
-  .blog-head .icon svg { width: 22px; height: 22px; }
-  .blog-head h2 {
-    font-family: var(--serif-display);
-    font-size: 1.9rem;
-    margin: 0;
-    font-weight: 700;
-  }
 
-  article.post { padding: 1.4rem 0; border-bottom: 1px solid var(--rule); }
-  article.post:last-child { border-bottom: none; }
+  .band-head h2 { margin: 0; }
 
-  article.post .date {
-    font-size: 0.9rem;
-    color: var(--muted);
-    font-style: italic;
-  }
+  .band-signup { max-width: 380px; }
+  .band-signup p { margin: 0 0 0.5rem; font-size: 0.92rem; color: var(--band-text); opacity: 0.9; }
 
-  article.post h3 {
-    font-family: var(--serif-display);
-    font-size: 1.4rem;
-    margin: 0.25rem 0 0.4rem;
-    font-weight: 700;
-  }
-  article.post h3 a { color: var(--text); }
-  article.post h3 a:hover { color: var(--accent); }
+  .band-signup form { display: flex; gap: 0.4rem; flex-wrap: wrap; }
 
-  article.post p { margin: 0; color: var(--muted); font-size: 1rem; }
-
-  /* Signup */
-  .signup {
-    background: var(--surface);
-    border: 1px solid var(--rule);
-    border-radius: 24px;
-    padding: 1.8rem;
-    margin: 3rem 0 0;
-  }
-  .signup h2 { font-family: var(--serif-display); font-size: 1.4rem; margin: 0 0 0.4rem; }
-  .signup p { margin: 0 0 1rem; color: var(--muted); font-size: 1rem; }
-
-  .signup form { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-
-  .signup input[type="email"] {
-    flex: 1 1 240px;
-    padding: 0.7rem 0.9rem;
-    font-family: var(--sans-body);
-    font-size: 1rem;
+  .band-signup input[type="email"] {
+    flex: 1 1 180px;
+    padding: 0.6rem 0.8rem;
+    font-family: var(--sans);
+    font-size: 0.95rem;
     background: transparent;
-    color: var(--text);
-    border: 1px solid var(--rule);
+    color: var(--band-text);
+    border: 1px solid var(--band-text);
     border-radius: 14px;
+    opacity: 0.9;
   }
-  .signup input[type="email"]:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
 
-  .signup button {
-    padding: 0.7rem 1.4rem;
-    font-family: var(--sans-body);
+  .band-more { margin-top: 1.5rem; text-align: center; }
+
+  .more-btn {
+    display: inline-block;
+    padding: 0.85rem 1.7rem;
+    background: var(--icon-bg);
+    color: var(--icon-fg);
+    border-radius: 16px;
+    font-family: var(--sans);
     font-weight: 700;
     font-size: 1rem;
+    text-decoration: none;
+  }
+  .more-btn:hover { opacity: 0.9; text-decoration: none; }
+
+  .more-ar {
+    display: block;
+    margin-top: 0.6rem;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 0.95rem;
+    opacity: 0.85;
+  }
+
+  .band-signup .hadith-note {
+    font-family: var(--serif);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0.9rem 0 0;
+    opacity: 0.85;
+  }
+
+  .band-signup input[type="email"] {
+    color: #1A110D;
+    opacity: 1;
+    border-color: #1A110D;
+  }
+  .band-signup input[type="email"]::placeholder { color: #1A110D; opacity: 0.85; }
+
+  :root[data-theme="dark"] .band-signup input[type="email"] { color: #FFFFFF; border-color: #FFFFFF; }
+  :root[data-theme="dark"] .band-signup input[type="email"]::placeholder { color: #FFFFFF; opacity: 0.85; }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .band-signup input[type="email"] { color: #FFFFFF; border-color: #FFFFFF; }
+    :root:not([data-theme="light"]) .band-signup input[type="email"]::placeholder { color: #FFFFFF; opacity: 0.85; }
+  }
+
+  .band-signup button {
+    padding: 0.6rem 1.1rem;
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 0.95rem;
     background: var(--icon-bg);
     color: var(--icon-fg);
     border: none;
     border-radius: 14px;
     cursor: pointer;
   }
-  .signup button:hover { opacity: 0.9; }
 
-  /* Tile colours: one per card, icons unchanged */
-  .cards .card { --tile-text: var(--text); --tile-muted: var(--muted); --tile-eyebrow: var(--accent); }
-  .cards .card p { color: var(--tile-muted); }
-  .cards .card .eyebrow { color: var(--tile-eyebrow); }
-  .cards .card .more { color: var(--tile-text); }
-  .cards .card h2 { color: var(--tile-text); }
-  .cards .card:nth-child(1) { background: #F6C89F; border-color: transparent; --tile-text: #3B2219; --tile-muted: #5A3A2C; --tile-eyebrow: #7A3A1C; }
-  .cards .card:nth-child(2) { background: #C9643A; border-color: transparent; --tile-text: #FFF8F0; --tile-muted: #FBE3D2; --tile-eyebrow: #FFF8F0; }
-  .cards .card:nth-child(3) { background: #9A4524; border-color: transparent; --tile-text: #FFF8F0; --tile-muted: #F5DCCB; --tile-eyebrow: #F6C89F; }
-  .cards .card:nth-child(4) { background: #E08A5E; border-color: transparent; --tile-text: #2A1610; --tile-muted: #4A2A1E; --tile-eyebrow: #2A1610; }
-
-  /* Logo colours: Arabic in Terracotta, English in Burnt Sienna (brighter in dark mode) */
-  :root { --logo-ar: #C9643A; --logo-en: #9A4524; }
-  :root[data-theme="dark"] { --logo-ar: #E08A5E; --logo-en: #E8A07A; }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) { --logo-ar: #E08A5E; --logo-en: #E8A07A; }
+  .band h2 {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: 2.4rem;
+    margin: 0 0 1.5rem;
+    line-height: 1.1;
   }
-  .logo svg.wordmark path { color: var(--logo-ar); }
-  .logo svg.wordmark path:nth-child(n+7) { color: var(--logo-en); }
+
+  .post {
+    padding: 1.3rem 0;
+    border-top: 1px solid var(--rule);
+  }
+  .post:first-of-type { border-top: none; }
+
+  .post .date {
+    font-size: 0.85rem;
+    font-style: italic;
+    opacity: 0.8;
+  }
+
+  .post h3 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 1.6rem;
+    line-height: 1.2;
+    margin: 0.2rem 0 0.4rem;
+  }
+  .post h3 a { color: var(--band-text); }
+  .post h3 a:hover { color: var(--accent); text-decoration: none; }
+
+  .post p { margin: 0; font-size: 1.02rem; opacity: 0.85; }
+
+  /* Sign-up */
+  .signup {
+    text-align: center;
+    padding: 3rem 0;
+    border-top: 1px solid var(--rule);
+  }
+  .signup h2 { font-family: var(--serif); font-weight: 900; font-size: 2rem; margin: 0 0 0.5rem; }
+  .signup p { color: var(--muted); margin: 0 0 1.5rem; }
+
+  .signup form { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; }
+
+  .signup input[type="email"] {
+    flex: 1 1 260px;
+    max-width: 380px;
+    padding: 0.85rem 1rem;
+    font-family: var(--sans);
+    font-size: 1rem;
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--rule);
+    border-radius: 16px;
+  }
+
+  .signup button {
+    padding: 0.85rem 1.6rem;
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 1rem;
+    background: var(--icon-bg);
+    color: var(--icon-fg);
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+  }
 
   footer.site {
     border-top: 1px solid var(--rule);
     padding: 2rem 0 3rem;
-    margin-top: 3rem;
     color: var(--muted);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     text-align: center;
+  }
+
+  @media (max-width: 860px) {
+    .tiles { grid-template-columns: repeat(2, 1fr); }
+    .hero h1 { font-size: 2.4rem; }
+    .band { padding: 2rem 1.4rem; border-radius: 24px; }
+    .band h2 { font-size: 1.9rem; }
   }
 </style>
 </head>
 <body>
 
-<div class="wrap wide">
+<div class="container">
 
-  <header class="site">
-    <a class="logo" href="#" aria-label="Rashada home">
-      <svg class="wordmark" viewBox="0 0 752 888" aria-hidden="true">
-        <path d="M4 0H91V728H4V0Z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/>
-        <path d="M113 543H319V644H337V544H424V644H446V544H533V644H555V544H640V728H113V645H232V624H113V543Z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/>
-        <path d="M662 545H749L751 831L664 887C662 887.667 661 886.667 661 884L662 545Z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/>
-        <path d="M337 445H424V525H337V445ZM446 446H533V525H446V446ZM555 444H641V523H555V444Z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/>
-        <path d="M201 428L251 395V426L201 459V428ZM201 483L251 450V481L201 514V483Z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/>
-        <path d="M460 402L510 369V401L460 433V402ZM669 402L719 369V401L669 433V402Z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/>
-        <path d="M0 761H83V788H30V863H0V761Z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/>
-        <path d="M93 761H175V863H93V800H145V788H93V761ZM123 827H145V835H123V827Z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/>
-        <path d="M185 761H268V788H214V799H268V863H185V835H238V826H185V761Z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/>
-        <path d="M277 729H308V761H360V863H330V790H308V863H277V729Z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/>
-        <path d="M370 761H451V863H370V800H423V788H370V761ZM400 827H423V835H400V827Z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/>
-        <path d="M515 729H545V863H462V761H515V729ZM493 790H515V835H493V790Z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/>
-        <path d="M555 761H639V863H555V800H608V788H555V761ZM586 827H608V835H586V827Z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/>
-      </svg>
-    </a>
-    <div class="header-right">
+  <div class="topbar">
+    <nav aria-label="Main">
       <a href="#blog">Blog</a>
-      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch light and dark mode">Dark</button>
+      <a href="#newsletter">Subscribe</a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch light and dark mode">Dark</button>
+  </div>
+
+  <section class="hero">
+    <div class="logo-big" aria-label="Rashada">
+      <svg viewBox="0 0 752 888" aria-hidden="true">
+        <path d="M4 9.00002C4 4.02945 8.02944 0 13 0H82C86.9706 0 91 4.02944 91 9V719C91 723.971 86.9706 728 82 728H13C8.02944 728 4 723.971 4 719V9.00002Z" fill-rule="evenodd" clip-rule="evenodd"/>
+        <path d="M113 552C113 547.029 117.029 543 122 543H310C314.971 543 319 547.029 319 552V635C319 639.971 323.029 644 328 644C332.971 644 337 639.971 337 635V553C337 548.029 341.029 544 346 544H415C419.971 544 424 548.029 424 553V635C424 639.971 428.029 644 433 644H437C441.971 644 446 639.971 446 635V553C446 548.029 450.029 544 455 544H524C528.971 544 533 548.029 533 553V635C533 639.971 537.029 644 542 644H546C550.971 644 555 639.971 555 635V553C555 548.029 559.029 544 564 544H631C635.971 544 640 548.029 640 553V719C640 723.971 635.971 728 631 728H122C117.029 728 113 723.971 113 719V654C113 649.029 117.029 645 122 645H223C227.971 645 232 640.971 232 636V633C232 628.029 227.971 624 223 624H122C117.029 624 113 619.971 113 615V552Z" fill-rule="evenodd" clip-rule="evenodd"/>
+        <path d="M661.974 553.974C661.988 549.013 666.013 545 670.974 545H740.063C745.009 545 749.028 548.991 749.062 553.937L750.965 825.968C750.987 829.095 749.384 832.009 746.732 833.665L674.815 878.574C668.81 882.323 661.027 877.993 661.048 870.913L661.974 553.974Z" fill-rule="evenodd" clip-rule="evenodd"/>
+        <path d="M337 454C337 449.029 341.029 445 346 445H415C419.971 445 424 449.029 424 454V516C424 520.971 419.971 525 415 525H346C341.029 525 337 520.971 337 516V454ZM446 455C446 450.029 450.029 446 455 446H524C528.971 446 533 450.029 533 455V516C533 520.971 528.971 525 524 525H455C450.029 525 446 520.971 446 516V455ZM555 453C555 448.029 559.029 444 564 444H632C636.971 444 641 448.029 641 453V514C641 518.971 636.971 523 632 523H564C559.029 523 555 518.971 555 514V453Z" fill-rule="evenodd" clip-rule="evenodd"/>
+        <path d="M201 432.843C201 429.82 202.519 426.998 205.042 425.332L237.042 404.212C243.026 400.263 251 404.554 251 411.723V421.157C251 424.18 249.481 427.002 246.958 428.668L214.958 449.788C208.974 453.737 201 449.446 201 442.277V432.843ZM201 487.843C201 484.82 202.519 481.998 205.042 480.332L237.042 459.212C243.026 455.263 251 459.554 251 466.723V476.157C251 479.18 249.481 482.002 246.958 483.668L214.958 504.788C208.974 508.737 201 504.446 201 497.277V487.843Z" fill-rule="evenodd" clip-rule="evenodd"/>
+        <path d="M460 406.843C460 403.82 461.519 400.998 464.042 399.332L496.042 378.212C502.026 374.263 510 378.554 510 385.723V396.075C510 399.143 508.436 402.001 505.851 403.655L473.851 424.135C467.861 427.969 460 423.667 460 416.555V406.843ZM669 406.843C669 403.82 670.519 400.998 673.042 399.332L705.042 378.212C711.026 374.263 719 378.554 719 385.723V396.075C719 399.143 717.436 402.001 714.851 403.655L682.851 424.135C676.861 427.969 669 423.667 669 416.555V406.843Z" fill-rule="evenodd" clip-rule="evenodd"/>
+        <path d="M0 766C0 763.239 2.23858 761 5 761H78C80.7614 761 83 763.239 83 766V783C83 785.761 80.7614 788 78 788H35C32.2386 788 30 790.239 30 793V858C30 860.761 27.7614 863 25 863H5C2.23858 863 0 860.761 0 858V766Z" fill-rule="evenodd" clip-rule="evenodd"/>
+        <path d="M93 766C93 763.239 95.2386 761 98 761H170C172.761 761 175 763.239 175 766V858C175 860.761 172.761 863 170 863H98C95.2386 863 93 860.761 93 858V805C93 802.239 95.2386 800 98 800H140C142.761 800 145 797.761 145 795V793C145 790.239 142.761 788 140 788H98C95.2386 788 93 785.761 93 783V766ZM123 831C123 828.791 124.791 827 127 827H141C143.209 827 145 828.791 145 831C145 833.209 143.209 835 141 835H127C124.791 835 123 833.209 123 831Z" fill-rule="evenodd" clip-rule="evenodd"/>
+        <path d="M185 766C185 763.239 187.239 761 190 761H263C265.761 761 268 763.239 268 766V783C268 785.761 265.761 788 263 788H219C216.239 788 214 790.239 214 793V794C214 796.761 216.239 799 219 799H263C265.761 799 268 801.239 268 804V858C268 860.761 265.761 863 263 863H190C187.239 863 185 860.761 185 858V840C185 837.239 187.239 835 190 835H233.5C235.985 835 238 832.985 238 830.5C238 828.015 235.985 826 233.5 826H190C187.239 826 185 823.761 185 821V766Z" fill-rule="evenodd" clip-rule="evenodd"/>
+        <path d="M277 734C277 731.239 279.239 729 282 729H303C305.761 729 308 731.239 308 734V756C308 758.761 310.239 761 313 761H355C357.761 761 360 763.239 360 766V858C360 860.761 357.761 863 355 863H335C332.239 863 330 860.761 330 858V795C330 792.239 327.761 790 325 790H313C310.239 790 308 792.239 308 795V858C308 860.761 305.761 863 303 863H282C279.239 863 277 860.761 277 858V734Z" fill-rule="evenodd" clip-rule="evenodd"/>
+        <path d="M370 766C370 763.239 372.239 761 375 761H446C448.761 761 451 763.239 451 766V858C451 860.761 448.761 863 446 863H375C372.239 863 370 860.761 370 858V805C370 802.239 372.239 800 375 800H418C420.761 800 423 797.761 423 795V793C423 790.239 420.761 788 418 788H375C372.239 788 370 785.761 370 783V766ZM400 831C400 828.791 401.791 827 404 827H419C421.209 827 423 828.791 423 831C423 833.209 421.209 835 419 835H404C401.791 835 400 833.209 400 831Z" fill-rule="evenodd" clip-rule="evenodd"/>
+        <path d="M515 734C515 731.239 517.239 729 520 729H540C542.761 729 545 731.239 545 734V858C545 860.761 542.761 863 540 863H467C464.239 863 462 860.761 462 858V766C462 763.239 464.239 761 467 761H510C512.761 761 515 758.761 515 756V734ZM493 795C493 792.239 495.239 790 498 790H510C512.761 790 515 792.239 515 795V830C515 832.761 512.761 835 510 835H498C495.239 835 493 832.761 493 830V795Z" fill-rule="evenodd" clip-rule="evenodd"/>
+        <path d="M555 766C555 763.239 557.239 761 560 761H634C636.761 761 639 763.239 639 766V858C639 860.761 636.761 863 634 863H560C557.239 863 555 860.761 555 858V805C555 802.239 557.239 800 560 800H603C605.761 800 608 797.761 608 795V793C608 790.239 605.761 788 603 788H560C557.239 788 555 785.761 555 783V766ZM586 831C586 828.791 587.791 827 590 827H604C606.209 827 608 828.791 608 831C608 833.209 606.209 835 604 835H590C587.791 835 586 833.209 586 831Z" fill-rule="evenodd" clip-rule="evenodd"/>
+      </svg>
     </div>
-  </header>
+    <h1>Understand and live your faith, with depth.</h1>
+    <p>Rashada is for Muslims and those interested in Islam who live in a globalised, connected world. Teachings from classic resources, made clear and simple, so you can understand, live, and practise your faith wherever you are.</p>
+    <p class="meaning">Rashada means &ldquo;firm guidance&rdquo;: the sound judgment and upright conduct that grows from <em>hudā</em>, the guidance that shows us the way.</p>
+  </section>
 
-  <main>
+  <section class="tiles" aria-label="Ways to learn with Rashada">
 
-    <section class="hero">
-      <h1>Understand and live your faith, with depth.</h1>
-      <p>Rashada is for Muslims and those interested in Islam who live in a globalised, connected world. Teachings from Arab scholars, made clear and simple, so you can understand, live, and practise your faith wherever you are.</p>
-    </section>
-
-    <!-- Four cards: YouTube, Muslim Cards, Books, Public Talks -->
-    <section class="cards" aria-label="Ways to learn with Rashada">
-
-      <div class="card">
-        <div class="icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="5" width="20" height="14" rx="4"/>
-            <polygon points="10,9 15,12 10,15" fill="currentColor" stroke="none"/>
-          </svg>
-        </div>
-        <p class="eyebrow">YouTube</p>
-        <h2>Watch the teachings</h2>
-        <p>Scholarly lectures from Arabic sources, explained in simple English for life in the West.</p>
-        <a class="more" href="#">Watch &rarr;</a>
+    <div class="tile">
+      <div class="icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="5" width="20" height="14" rx="4"/>
+          <polygon points="10,9 15,12 10,15" fill="currentColor" stroke="none"/>
+        </svg>
       </div>
+      <h2 class="big">YouTube</h2>
+      <p class="action">Watch the teachings</p>
+      <p>Scholarly lectures from Arabic sources, explained in simple English for life in the West.</p>
+      <a class="more" href="https://www.youtube.com/@Rashadachannel" target="_blank" rel="noopener">Watch &rarr;</a>
+    </div>
 
-      <div class="card">
-        <div class="icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 5h10v8H9l-4 3v-3H4z"/>
-            <path d="M16 9h4v8h-2v3l-3-3h-3"/>
-          </svg>
-        </div>
-        <p class="eyebrow">Muslim Cards</p>
-        <h2>Start a conversation</h2>
-        <p>Conversation and reflection cards based on the Qur'an and hadith, for family, friends, and yourself.</p>
-        <a class="more" href="#">Explore &rarr;</a>
+    <div class="tile">
+      <div class="icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 5h10v8H9l-4 3v-3H4z"/>
+          <path d="M16 9h4v8h-2v3l-3-3h-3"/>
+        </svg>
       </div>
+      <h2 class="big">Muslim Cards</h2>
+      <p class="action">Start a conversation</p>
+      <p>Conversation and reflection cards based on the Qur'an and hadith, for family, friends, and yourself.</p>
+      <a class="more" href="#">Explore &rarr;</a>
+    </div>
 
-      <div class="card">
-        <div class="icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 5c3-1 6-1 9 1v13c-3-2-6-2-9-1z"/>
-            <path d="M21 5c-3-1-6-1-9 1v13c3-2 6-2 9-1z"/>
-          </svg>
-        </div>
-        <p class="eyebrow">Books</p>
-        <h2>Read and reflect</h2>
-        <p>Written reflections and free journals to help you live your faith day by day.</p>
-        <a class="more" href="#">Read &rarr;</a>
+    <div class="tile">
+      <div class="icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 5c3-1 6-1 9 1v13c-3-2-6-2-9-1z"/>
+          <path d="M21 5c-3-1-6-1-9 1v13c3-2 6-2 9-1z"/>
+        </svg>
       </div>
+      <h2 class="big">Books</h2>
+      <p class="action">Read and reflect</p>
+      <p>Written reflections and free journals to help you live your faith day by day.</p>
+      <a class="more" href="#">Read &rarr;</a>
+    </div>
 
-      <div class="card">
-        <div class="icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="9" y="2" width="6" height="12" rx="3"/>
-            <path d="M5 11a7 7 0 0 0 14 0"/>
-            <line x1="12" y1="18" x2="12" y2="22"/>
-          </svg>
-        </div>
-        <p class="eyebrow">Public talks</p>
-        <h2>Hear it live</h2>
-        <p>Talks and lectures for communities, in person and online, on the core concepts of Islam.</p>
-        <a class="more" href="#">Listen &rarr;</a>
+    <div class="tile">
+      <div class="icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="2" width="6" height="12" rx="3"/>
+          <path d="M5 11a7 7 0 0 0 14 0"/>
+          <line x1="12" y1="18" x2="12" y2="22"/>
+        </svg>
       </div>
+      <h2 class="big">Public talks</h2>
+      <p class="action">Hear it live</p>
+      <p>Talks and lectures for communities, in person and online, on the core concepts of Islam.</p>
+      <a class="more" href="#">Listen &rarr;</a>
+    </div>
 
-    </section>
+  </section>
 
-    <!-- The blog is the main content of the page -->
-    <section class="blog" id="blog">
-      <div class="blog-head">
-        <div class="icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 20h4L19 9l-4-4L4 16z"/>
-            <line x1="13" y1="7" x2="17" y2="11"/>
-          </svg>
-        </div>
-        <h2>The Blog</h2>
+  <section class="band" id="blog">
+    <div class="band-head">
+      <h2>The Blog</h2>
+      <div class="band-signup" id="newsletter">
+        <p>Receive the weekly reflection by email. Cookie free.</p>
+        <!-- Replace the action below with your Substack subscribe link or embed code. -->
+        <form action="#" method="post" onsubmit="return false;">
+          <input type="email" name="email" placeholder="Your email address" required aria-label="Email address">
+          <button type="submit">Subscribe</button>
+        </form>
+        <p class="hadith-note"><em>The Prophet ﷺ said: "If anyone travels on a road in search of knowledge, Allah will cause him to travel on one of the roads of Paradise. The angels will lower their wings in their great pleasure with one who seeks knowledge, and the inhabitants of the heavens and the Earth and the fish in the deep waters will ask forgiveness for the learned man." (Abu Dawud 3641)</em></p>
       </div>
+    </div>
 
-      <article class="post">
-        <div class="date">November 2026</div>
-        <h3><a href="#">Creatures Who Can Choose</a></h3>
-        <p>A reflection on the freedom we have, and the map we have been given.</p>
-      </article>
+    <article class="post">
+      <div class="date">1 November 2026</div>
+      <h3><a href="#">Creatures Who Can Choose</a></h3>
+      <p>Imagine, for just one second, that you are not a human.</p>
+    </article>
 
-      <article class="post">
-        <div class="date">October 2026</div>
-        <h3><a href="#">Money Is Just Numbers</a></h3>
-        <p>How we see our wealth, and what it becomes when we spend it for Allah.</p>
-      </article>
+    <article class="post">
+      <div class="date">29 October 2026</div>
+      <h3><a href="#">Money Is Just Numbers</a></h3>
+      <p>Paying by card has a hidden effect.</p>
+    </article>
 
-      <article class="post">
-        <div class="date">October 2026</div>
-        <h3><a href="#">Normal Body, Not Nobody</a></h3>
-        <p>Looking posh, feeling small, and the humility of a grateful heart.</p>
-      </article>
-    </section>
+    <article class="post">
+      <div class="date">24 October 2026</div>
+      <h3><a href="#">Normal Body, Not Nobody</a></h3>
+      <p>Looking posh is for people who feel like nobodies and want to feel like somebodies.</p>
+    </article>
 
-    <section class="signup" id="newsletter">
-      <h2>Get the weekly reflection by email</h2>
-      <p>One reflection on a core concept of Islam, every week. No jargon. Unsubscribe at any time.</p>
-      <!-- Replace the action below with your Substack subscribe link or embed code. -->
-      <form action="#" method="post" onsubmit="return false;">
-        <input type="email" name="email" placeholder="Your email address" required aria-label="Email address">
-        <button type="submit">Subscribe</button>
-      </form>
-    </section>
+    <div class="band-more">
+      <a class="more-btn" href="#archive">Increase me in knowledge &rarr;</a>
+      <span class="more-ar">Zidnī ʿIlman (Ṭā-Hā 20:114)</span>
+    </div>
+  </section>
 
-  </main>
 
   <footer class="site">
     Rashada. Teachings for a connected world.
@@ -438,7 +562,10 @@
     }
 
     function render() {
-      btn.textContent = isDark() ? 'Light' : 'Dark';
+      btn.innerHTML = isDark()
+        ? '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>Light'
+        : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>Dark';
+      btn.className = 'theme-toggle ' + (isDark() ? 'to-light' : 'to-dark');
     }
 
     btn.addEventListener('click', function () {
