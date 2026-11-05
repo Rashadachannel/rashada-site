@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muslim Cards Deck | Rashada</title>
+<meta name="description" content="The Muslim Cards deck: conversation and reflection cards based on the Qur'an and hadith.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="container">
+  <div class="topbar">
+    <nav aria-label="Main">
+      <a href="/">Home</a>
+      <a href="/cards/">Cards</a>
+      <a href="/youtube.html">YouTube</a>
+      <a href="/books.html">Books</a>
+      <a href="/blog/">Blog</a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch light and dark mode">Dark</button>
+  </div>
+
+  <section class="page-head">
+    <a class="back" href="/cards/">&larr; All cards</a>
+    <h1>Muslim Cards</h1>
+    <p class="price">Price: &pound;XX (placeholder)</p>
+  </section>
+
+  <section class="gallery" aria-label="Card images">
+    <div class="slide placeholder-img">Image 1</div><div class="slide placeholder-img">Image 2</div><div class="slide placeholder-img">Image 3</div><div class="slide placeholder-img">Image 4</div>
+  </section>
+
+  <section class="product-info">
+    <p>Placeholder description. Replace this with a short description of the deck: how many cards, the themes, and who it is for.</p>
+  </section>
+
+  <section class="notify" id="notify">
+    <h2>Get notified when it is out</h2>
+    <p>Put your email here and we will let you know as soon as the deck is available to buy.</p>
+    <form action="/api/notify" method="post">
+      <input type="hidden" name="card" value="muslim-cards">
+      <input type="email" name="email" placeholder="Your email address" required aria-label="Email address">
+      <button type="submit">Notify me</button>
+    </form>
+    <p class="note">Your email is only used for this notification. You can ask to be removed at any time.</p>
+  </section>
+
+  <footer class="site">
+    Rashada. Teachings for a connected world.
+  </footer>
+</div>
+<script src="/site.js"></script>
+</body>
+</html>

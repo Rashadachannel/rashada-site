@@ -8,409 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
-<style>
-  /* Bold variant. Palette A base, with the four tile colours used across the page. */
-  :root {
-    --bg: #FBF1E6;
-    --text: #3B2219;
-    --muted: #6E4A3C;
-    --accent: #B4552D;
-    --rule: rgba(59, 34, 25, 0.16);
-    --band: #F6C89F;
-    --band-grad: linear-gradient(180deg, #E08A5E 0%, #E08A5E 14%, #F3E3CC 100%);
-    --band-text: #3B2219;
-    --icon-bg: #1A110D;
-    --icon-fg: #FBF1E6;
-    --serif: "Playfair Display", Georgia, "Times New Roman", serif;
-    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-    --logo-ar: #C9643A;
-    --logo-en: #9A4524;
-  }
-
-  :root[data-theme="dark"] {
-    --bg: #000000;
-    --text: #F6E7D8;
-    --muted: #C9B2A2;
-    --accent: #E8A07A;
-    --rule: rgba(246, 231, 216, 0.16);
-    --band: #14100D;
-    --band-grad: linear-gradient(180deg, #9A4524 0%, #9A4524 14%, #000000 100%);
-    --band-text: #F6E7D8;
-    --icon-bg: #F6E7D8;
-    --icon-fg: #000000;
-    --logo-ar: #E08A5E;
-    --logo-en: #E8A07A;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --bg: #000000;
-      --text: #F6E7D8;
-      --muted: #C9B2A2;
-      --accent: #E8A07A;
-      --rule: rgba(246, 231, 216, 0.16);
-      --band: #14100D;
-    --band-grad: linear-gradient(180deg, #9A4524 0%, #9A4524 14%, #000000 100%);
-      --band-text: #F6E7D8;
-      --icon-bg: #F6E7D8;
-      --icon-fg: #000000;
-      --logo-ar: #E08A5E;
-      --logo-en: #E8A07A;
-    }
-  }
-
-  * { box-sizing: border-box; }
-
-  html, body {
-    margin: 0;
-    padding: 0;
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--sans);
-    font-weight: 300;
-    font-size: 17px;
-    line-height: 1.65;
-  }
-
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-
-  .container { max-width: 1040px; margin: 0 auto; padding: 0 1.25rem; }
-
-  /* Top bar */
-  .topbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.4rem 0;
-  }
-  .topbar nav { display: flex; gap: 1.4rem; align-items: center; }
-  .topbar nav a { color: var(--text); font-family: var(--serif); font-size: 1.2rem; font-weight: 700; }
-  .topbar nav a:hover { color: var(--accent); text-decoration: none; }
-
-  .theme-toggle {
-    background: none;
-    border: 1px solid var(--rule);
-    color: var(--text);
-    font-family: var(--sans);
-    font-size: 1.05rem;
-    font-weight: 700;
-    padding: 0.4rem 1rem;
-    border-radius: 999px;
-    cursor: pointer;
-  }
-
-  /* Hero with centred logo */
-  .theme-toggle {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-  }
-  .theme-toggle svg {
-    width: 16px;
-    height: 16px;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 1.8;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-
-  /* Light button: light background, dark sun and text. Dark button: pitch black, light moon and text. */
-  .theme-toggle.to-light { background: #FBF1E6; color: #3B2219; border-color: #3B2219; }
-  .theme-toggle.to-dark { background: #000000; color: #FBF1E6; border-color: #000000; }
-
-  .hero {
-    text-align: center;
-    padding: 2.5rem 0 3.5rem;
-  }
-
-  .logo-big svg { height: 180px; width: auto; display: inline-block; }
-  .logo-big path:nth-child(-n+6) { fill: var(--logo-ar); }
-  .logo-big path:nth-child(n+7) { fill: var(--logo-en); }
-
-  .hero h1 {
-    font-family: var(--serif);
-    font-weight: 900;
-    font-size: 3.3rem;
-    line-height: 1.08;
-    margin: 2rem auto 1rem;
-    max-width: 780px;
-  }
-
-  .hero p {
-    font-size: 1.15rem;
-    color: var(--muted);
-    max-width: 640px;
-    margin: 0 auto;
-  }
-
-  .hero p.meaning {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 1.3rem;
-    line-height: 1.5;
-    color: var(--text);
-    margin: 1.5rem auto 0;
-    max-width: 640px;
-  }
-
-  /* Staggered tiles */
-  .tiles {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.2rem;
-    align-items: start;
-    margin: 0 0 4rem;
-  }
-
-  .tile {
-    border-radius: 28px;
-    aspect-ratio: 1 / 1;
-    padding: 1.4rem;
-    display: flex;
-    flex-direction: column;
-    color: var(--tile-text);
-    background: var(--tile-bg);
-    --tile-text: #3B2219;
-    --tile-muted: #5A3A2C;
-    --tile-eyebrow: #7A3A1C;
-  }
-
-  .tile:nth-child(1) { --tile-bg: #F6C89F; }
-  .tile:nth-child(2) { --tile-bg: #C9643A; --tile-text: #FFF8F0; --tile-muted: #FBE3D2; --tile-eyebrow: #FFF8F0; }
-  .tile:nth-child(3) { --tile-bg: #9A4524; --tile-text: #FFF8F0; --tile-muted: #F5DCCB; --tile-eyebrow: #F6C89F; }
-  .tile:nth-child(4) { --tile-bg: #E08A5E; --tile-text: #2A1610; --tile-muted: #4A2A1E; --tile-eyebrow: #2A1610; }
-
-  .tile h2.big { font-size: 2.1rem; font-weight: 900; line-height: 1.05; margin: 0 0 0.6rem; }
-  .tile .action {
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--tile-eyebrow);
-    margin: 0 0 0.5rem;
-  }
-
-  .tile .icon {
-    width: 46px;
-    height: 46px;
-    border-radius: 14px;
-    background: var(--icon-bg);
-    color: var(--icon-fg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: auto;
-  }
-  .tile .icon svg { width: 22px; height: 22px; }
-
-  .tile .eyebrow {
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--tile-eyebrow);
-    margin: 0 0 0.3rem;
-  }
-
-  .tile h2 {
-    font-family: var(--serif);
-    font-weight: 700;
-    font-size: 1.35rem;
-    line-height: 1.15;
-    margin: 0 0 0.5rem;
-    color: var(--tile-text);
-  }
-
-  .tile p {
-    font-size: 0.9rem;
-    line-height: 1.45;
-    color: var(--tile-muted);
-    margin: 0 0 0.6rem;
-    font-weight: 400;
-  }
-
-  .tile .more { font-weight: 700; color: var(--tile-text); font-size: 0.92rem; }
-
-  /* Blog band */
-  .band {
-    background: var(--band-grad);
-    color: var(--band-text);
-    border-radius: 32px;
-    padding: 3rem 2.5rem;
-    margin-bottom: 4rem;
-  }
-
-  .band-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-    margin-bottom: 1.5rem;
-  }
-
-  .band-head h2 { margin: 0; }
-
-  .band-signup { max-width: 380px; }
-  .band-signup p { margin: 0 0 0.5rem; font-size: 0.92rem; color: var(--band-text); opacity: 0.9; }
-
-  .band-signup form { display: flex; gap: 0.4rem; flex-wrap: wrap; }
-
-  .band-signup input[type="email"] {
-    flex: 1 1 180px;
-    padding: 0.6rem 0.8rem;
-    font-family: var(--sans);
-    font-size: 0.95rem;
-    background: transparent;
-    color: var(--band-text);
-    border: 1px solid var(--band-text);
-    border-radius: 14px;
-    opacity: 0.9;
-  }
-
-  .band-more { margin-top: 1.5rem; text-align: center; }
-
-  .more-btn {
-    display: inline-block;
-    padding: 0.85rem 1.7rem;
-    background: var(--icon-bg);
-    color: var(--icon-fg);
-    border-radius: 16px;
-    font-family: var(--sans);
-    font-weight: 700;
-    font-size: 1rem;
-    text-decoration: none;
-  }
-  .more-btn:hover { opacity: 0.9; text-decoration: none; }
-
-  .more-ar {
-    display: block;
-    margin-top: 0.6rem;
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 0.95rem;
-    opacity: 0.85;
-  }
-
-  .band-signup .hadith-note {
-    font-family: var(--serif);
-    font-size: 0.9rem;
-    line-height: 1.5;
-    margin: 0.9rem 0 0;
-    opacity: 0.85;
-  }
-
-  .band-signup input[type="email"] {
-    color: #1A110D;
-    opacity: 1;
-    border-color: #1A110D;
-  }
-  .band-signup input[type="email"]::placeholder { color: #1A110D; opacity: 0.85; }
-
-  :root[data-theme="dark"] .band-signup input[type="email"] { color: #FFFFFF; border-color: #FFFFFF; }
-  :root[data-theme="dark"] .band-signup input[type="email"]::placeholder { color: #FFFFFF; opacity: 0.85; }
-
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) .band-signup input[type="email"] { color: #FFFFFF; border-color: #FFFFFF; }
-    :root:not([data-theme="light"]) .band-signup input[type="email"]::placeholder { color: #FFFFFF; opacity: 0.85; }
-  }
-
-  .band-signup button {
-    padding: 0.6rem 1.1rem;
-    font-family: var(--sans);
-    font-weight: 700;
-    font-size: 0.95rem;
-    background: var(--icon-bg);
-    color: var(--icon-fg);
-    border: none;
-    border-radius: 14px;
-    cursor: pointer;
-  }
-
-  .band h2 {
-    font-family: var(--serif);
-    font-weight: 900;
-    font-size: 2.4rem;
-    margin: 0 0 1.5rem;
-    line-height: 1.1;
-  }
-
-  .post {
-    padding: 1.3rem 0;
-    border-top: 1px solid var(--rule);
-  }
-  .post:first-of-type { border-top: none; }
-
-  .post .date {
-    font-size: 0.85rem;
-    font-style: italic;
-    opacity: 0.8;
-  }
-
-  .post h3 {
-    font-family: var(--serif);
-    font-weight: 700;
-    font-size: 1.6rem;
-    line-height: 1.2;
-    margin: 0.2rem 0 0.4rem;
-  }
-  .post h3 a { color: var(--band-text); }
-  .post h3 a:hover { color: var(--accent); text-decoration: none; }
-
-  .post p { margin: 0; font-size: 1.02rem; opacity: 0.85; }
-
-  /* Sign-up */
-  .signup {
-    text-align: center;
-    padding: 3rem 0;
-    border-top: 1px solid var(--rule);
-  }
-  .signup h2 { font-family: var(--serif); font-weight: 900; font-size: 2rem; margin: 0 0 0.5rem; }
-  .signup p { color: var(--muted); margin: 0 0 1.5rem; }
-
-  .signup form { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; }
-
-  .signup input[type="email"] {
-    flex: 1 1 260px;
-    max-width: 380px;
-    padding: 0.85rem 1rem;
-    font-family: var(--sans);
-    font-size: 1rem;
-    background: transparent;
-    color: var(--text);
-    border: 1px solid var(--rule);
-    border-radius: 16px;
-  }
-
-  .signup button {
-    padding: 0.85rem 1.6rem;
-    font-family: var(--sans);
-    font-weight: 700;
-    font-size: 1rem;
-    background: var(--icon-bg);
-    color: var(--icon-fg);
-    border: none;
-    border-radius: 16px;
-    cursor: pointer;
-  }
-
-  footer.site {
-    border-top: 1px solid var(--rule);
-    padding: 2rem 0 3rem;
-    color: var(--muted);
-    font-size: 0.9rem;
-    text-align: center;
-  }
-
-  @media (max-width: 860px) {
-    .tiles { grid-template-columns: repeat(2, 1fr); }
-    .hero h1 { font-size: 2.4rem; }
-    .band { padding: 2rem 1.4rem; border-radius: 24px; }
-    .band h2 { font-size: 1.9rem; }
-  }
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -418,6 +16,9 @@
 
   <div class="topbar">
     <nav aria-label="Main">
+      <a href="/cards/">Cards</a>
+      <a href="/youtube.html">YouTube</a>
+      <a href="/books.html">Books</a>
       <a href="#blog">Blog</a>
       <a href="#newsletter">Subscribe</a>
     </nav>
@@ -459,7 +60,7 @@
       <h2 class="big">YouTube</h2>
       <p class="action">Watch the teachings</p>
       <p>Scholarly lectures from Arabic sources, explained in simple English for life in the West.</p>
-      <a class="more" href="https://www.youtube.com/@Rashadachannel" target="_blank" rel="noopener">Watch &rarr;</a>
+      <a class="more" href="/youtube.html">Watch &rarr;</a>
     </div>
 
     <div class="tile">
@@ -472,7 +73,7 @@
       <h2 class="big">Muslim Cards</h2>
       <p class="action">Start a conversation</p>
       <p>Conversation and reflection cards based on the Qur'an and hadith, for family, friends, and yourself.</p>
-      <a class="more" href="#">Explore &rarr;</a>
+      <a class="more" href="/cards/">Explore &rarr;</a>
     </div>
 
     <div class="tile">
@@ -485,7 +86,7 @@
       <h2 class="big">Books</h2>
       <p class="action">Read and reflect</p>
       <p>Written reflections and free journals to help you live your faith day by day.</p>
-      <a class="more" href="#">Read &rarr;</a>
+      <a class="more" href="/books.html">Read &rarr;</a>
     </div>
 
     <div class="tile">
@@ -517,24 +118,24 @@
 
     <article class="post">
       <div class="date">1 November 2026</div>
-      <h3><a href="#">Creatures Who Can Choose</a></h3>
+      <h3><a href="/blog/creatures-who-can-choose.html">Creatures Who Can Choose</a></h3>
       <p>Imagine, for just one second, that you are not a human.</p>
     </article>
 
     <article class="post">
       <div class="date">29 October 2026</div>
-      <h3><a href="#">Money Is Just Numbers</a></h3>
+      <h3><a href="/blog/money-is-just-numbers.html">Money Is Just Numbers</a></h3>
       <p>Paying by card has a hidden effect.</p>
     </article>
 
     <article class="post">
       <div class="date">24 October 2026</div>
-      <h3><a href="#">Normal Body, Not Nobody</a></h3>
+      <h3><a href="/blog/normal-body-not-nobody.html">Normal Body, Not Nobody</a></h3>
       <p>Looking posh is for people who feel like nobodies and want to feel like somebodies.</p>
     </article>
 
     <div class="band-more">
-      <a class="more-btn" href="#archive">Increase me in knowledge &rarr;</a>
+      <a class="more-btn" href="/blog/">Increase me in knowledge &rarr;</a>
       <span class="more-ar">Zidnī ʿIlman (Ṭā-Hā 20:114)</span>
     </div>
   </section>
@@ -546,34 +147,7 @@
 
 </div>
 
-<script>
-  (function () {
-    var root = document.documentElement;
-    var btn = document.getElementById('themeToggle');
-    var systemDark = window.matchMedia('(prefers-color-scheme: dark)');
-
-    function isDark() {
-      var explicit = root.getAttribute('data-theme');
-      if (explicit) return explicit === 'dark';
-      return systemDark.matches;
-    }
-
-    function render() {
-      btn.innerHTML = isDark()
-        ? '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>Light'
-        : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>Dark';
-      btn.className = 'theme-toggle ' + (isDark() ? 'to-light' : 'to-dark');
-    }
-
-    btn.addEventListener('click', function () {
-      root.setAttribute('data-theme', isDark() ? 'light' : 'dark');
-      render();
-    });
-
-    systemDark.addEventListener('change', render);
-    render();
-  })();
-</script>
+<script src="site.js"></script>
 
 </body>
 </html>
