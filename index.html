@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rashada</title>
+<meta name="description" content="Rashada is for Muslims and those interested in Islam who live in a globalised, connected world. Teachings from Arab scholars, made clear and simple.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  /* Palette A: Desert Dawn. Light is the default; dark mode is pitch black. */
+  :root {
+    --bg: #FBF1E6;
+    --surface: #F5EEE4;
+    --text: #3B2219;
+    --accent: #B4552D;
+    --muted: #7A5446;
+    --rule: rgba(59, 34, 25, 0.16);
+    --icon-bg: #1A110D;
+    --icon-fg: #FBF1E6;
+    --serif-display: "Playfair Display", Georgia, "Times New Roman", serif;
+    --sans-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #000000;
+    --surface: #0E0A08;
+    --text: #F6E7D8;
+    --accent: #E8A07A;
+    --muted: #C9B2A2;
+    --rule: rgba(246, 231, 216, 0.16);
+    --icon-bg: #F6E7D8;
+    --icon-fg: #000000;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #000000;
+      --surface: #0E0A08;
+      --text: #F6E7D8;
+      --accent: #E8A07A;
+      --muted: #C9B2A2;
+      --rule: rgba(246, 231, 216, 0.16);
+      --icon-bg: #F6E7D8;
+      --icon-fg: #000000;
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans-body);
+    font-size: 19px;
+    line-height: 1.7;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .wrap { max-width: 680px; margin: 0 auto; padding: 0 1.25rem; }
+  .wrap.wide { max-width: 900px; }
+
+  /* Header */
+  header.site {
+    padding: 2.25rem 0 1.5rem;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .logo { display: flex; align-items: center; gap: 0.9rem; color: var(--text); text-decoration: none; }
+  .logo:hover { text-decoration: none; }
+  .logo svg.wordmark { height: 192px; width: auto; flex: none; display: block; }
+  .logo .word {
+    font-family: var(--serif-display);
+    font-size: 1.9rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    line-height: 1;
+  }
+  .logo .greeting {
+    display: block;
+    font-family: var(--sans-body);
+    font-size: 0.85rem;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+    margin-top: 0.25rem;
+  }
+
+  .header-right { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+  .header-right a { color: var(--text); font-size: 0.95rem; }
+  .header-right a:hover { color: var(--accent); }
+
+  .theme-toggle {
+    background: none;
+    border: 1px solid var(--rule);
+    color: var(--text);
+    font-family: var(--sans-body);
+    font-size: 0.9rem;
+    padding: 0.35rem 0.8rem;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* Hero */
+  .hero { padding: 3.5rem 0 2.5rem; }
+  .hero h1 {
+    font-family: var(--serif-display);
+    font-size: 2.5rem;
+    line-height: 1.2;
+    margin: 0 0 1rem;
+    font-weight: 700;
+  }
+  .hero p { margin: 0; color: var(--muted); }
+
+  /* Four cards */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 0.9rem;
+    margin: 0 0 2.5rem;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 24px;
+    padding: 1.1rem;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--icon-bg);
+    color: var(--icon-fg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.7rem;
+  }
+  .icon svg { width: 22px; height: 22px; }
+
+  .eyebrow {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 0.35rem;
+  }
+
+  .card h2 {
+    font-family: var(--serif-display);
+    font-size: 1.2rem;
+    line-height: 1.2;
+    margin: 0 0 0.4rem;
+    font-weight: 700;
+  }
+
+  .card p { margin: 0 0 0.6rem; color: var(--muted); font-size: 0.88rem; line-height: 1.45; }
+
+  .card .more { margin-top: auto; font-weight: 700; color: var(--text); font-size: 1rem; }
+  .card .more:hover { color: var(--accent); }
+
+  /* Blog */
+  section.blog { padding-bottom: 3rem; }
+
+  .blog-head {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .blog-head .icon { margin: 0; width: 48px; height: 48px; border-radius: 12px; }
+  .blog-head .icon svg { width: 22px; height: 22px; }
+  .blog-head h2 {
+    font-family: var(--serif-display);
+    font-size: 1.9rem;
+    margin: 0;
+    font-weight: 700;
+  }
+
+  article.post { padding: 1.4rem 0; border-bottom: 1px solid var(--rule); }
+  article.post:last-child { border-bottom: none; }
+
+  article.post .date {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  article.post h3 {
+    font-family: var(--serif-display);
+    font-size: 1.4rem;
+    margin: 0.25rem 0 0.4rem;
+    font-weight: 700;
+  }
+  article.post h3 a { color: var(--text); }
+  article.post h3 a:hover { color: var(--accent); }
+
+  article.post p { margin: 0; color: var(--muted); font-size: 1rem; }
+
+  /* Signup */
+  .signup {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 24px;
+    padding: 1.8rem;
+    margin: 3rem 0 0;
+  }
+  .signup h2 { font-family: var(--serif-display); font-size: 1.4rem; margin: 0 0 0.4rem; }
+  .signup p { margin: 0 0 1rem; color: var(--muted); font-size: 1rem; }
+
+  .signup form { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+  .signup input[type="email"] {
+    flex: 1 1 240px;
+    padding: 0.7rem 0.9rem;
+    font-family: var(--sans-body);
+    font-size: 1rem;
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+  }
+  .signup input[type="email"]:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+  .signup button {
+    padding: 0.7rem 1.4rem;
+    font-family: var(--sans-body);
+    font-weight: 700;
+    font-size: 1rem;
+    background: var(--icon-bg);
+    color: var(--icon-fg);
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+  }
+  .signup button:hover { opacity: 0.9; }
+
+  /* Tile colours: one per card, icons unchanged */
+  .cards .card { --tile-text: var(--text); --tile-muted: var(--muted); --tile-eyebrow: var(--accent); }
+  .cards .card p { color: var(--tile-muted); }
+  .cards .card .eyebrow { color: var(--tile-eyebrow); }
+  .cards .card .more { color: var(--tile-text); }
+  .cards .card h2 { color: var(--tile-text); }
+  .cards .card:nth-child(1) { background: #F6C89F; border-color: transparent; --tile-text: #3B2219; --tile-muted: #5A3A2C; --tile-eyebrow: #7A3A1C; }
+  .cards .card:nth-child(2) { background: #C9643A; border-color: transparent; --tile-text: #FFF8F0; --tile-muted: #FBE3D2; --tile-eyebrow: #FFF8F0; }
+  .cards .card:nth-child(3) { background: #9A4524; border-color: transparent; --tile-text: #FFF8F0; --tile-muted: #F5DCCB; --tile-eyebrow: #F6C89F; }
+  .cards .card:nth-child(4) { background: #E08A5E; border-color: transparent; --tile-text: #2A1610; --tile-muted: #4A2A1E; --tile-eyebrow: #2A1610; }
+
+  /* Logo colours: Arabic in Terracotta, English in Burnt Sienna (brighter in dark mode) */
+  :root { --logo-ar: #C9643A; --logo-en: #9A4524; }
+  :root[data-theme="dark"] { --logo-ar: #E08A5E; --logo-en: #E8A07A; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --logo-ar: #E08A5E; --logo-en: #E8A07A; }
+  }
+  .logo svg.wordmark path { color: var(--logo-ar); }
+  .logo svg.wordmark path:nth-child(n+7) { color: var(--logo-en); }
+
+  footer.site {
+    border-top: 1px solid var(--rule);
+    padding: 2rem 0 3rem;
+    margin-top: 3rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap wide">
+
+  <header class="site">
+    <a class="logo" href="#" aria-label="Rashada home">
+      <svg class="wordmark" viewBox="0 0 752 888" aria-hidden="true">
+        <path d="M4 0H91V728H4V0Z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/>
+        <path d="M113 543H319V644H337V544H424V644H446V544H533V644H555V544H640V728H113V645H232V624H113V543Z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/>
+        <path d="M662 545H749L751 831L664 887C662 887.667 661 886.667 661 884L662 545Z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/>
+        <path d="M337 445H424V525H337V445ZM446 446H533V525H446V446ZM555 444H641V523H555V444Z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/>
+        <path d="M201 428L251 395V426L201 459V428ZM201 483L251 450V481L201 514V483Z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/>
+        <path d="M460 402L510 369V401L460 433V402ZM669 402L719 369V401L669 433V402Z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/>
+        <path d="M0 761H83V788H30V863H0V761Z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/>
+        <path d="M93 761H175V863H93V800H145V788H93V761ZM123 827H145V835H123V827Z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/>
+        <path d="M185 761H268V788H214V799H268V863H185V835H238V826H185V761Z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/>
+        <path d="M277 729H308V761H360V863H330V790H308V863H277V729Z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/>
+        <path d="M370 761H451V863H370V800H423V788H370V761ZM400 827H423V835H400V827Z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/>
+        <path d="M515 729H545V863H462V761H515V729ZM493 790H515V835H493V790Z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/>
+        <path d="M555 761H639V863H555V800H608V788H555V761ZM586 827H608V835H586V827Z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/>
+      </svg>
+    </a>
+    <div class="header-right">
+      <a href="#blog">Blog</a>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch light and dark mode">Dark</button>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <h1>Understand and live your faith, with depth.</h1>
+      <p>Rashada is for Muslims and those interested in Islam who live in a globalised, connected world. Teachings from Arab scholars, made clear and simple, so you can understand, live, and practise your faith wherever you are.</p>
+    </section>
+
+    <!-- Four cards: YouTube, Muslim Cards, Books, Public Talks -->
+    <section class="cards" aria-label="Ways to learn with Rashada">
+
+      <div class="card">
+        <div class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="5" width="20" height="14" rx="4"/>
+            <polygon points="10,9 15,12 10,15" fill="currentColor" stroke="none"/>
+          </svg>
+        </div>
+        <p class="eyebrow">YouTube</p>
+        <h2>Watch the teachings</h2>
+        <p>Scholarly lectures from Arabic sources, explained in simple English for life in the West.</p>
+        <a class="more" href="#">Watch &rarr;</a>
+      </div>
+
+      <div class="card">
+        <div class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 5h10v8H9l-4 3v-3H4z"/>
+            <path d="M16 9h4v8h-2v3l-3-3h-3"/>
+          </svg>
+        </div>
+        <p class="eyebrow">Muslim Cards</p>
+        <h2>Start a conversation</h2>
+        <p>Conversation and reflection cards based on the Qur'an and hadith, for family, friends, and yourself.</p>
+        <a class="more" href="#">Explore &rarr;</a>
+      </div>
+
+      <div class="card">
+        <div class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 5c3-1 6-1 9 1v13c-3-2-6-2-9-1z"/>
+            <path d="M21 5c-3-1-6-1-9 1v13c3-2 6-2 9-1z"/>
+          </svg>
+        </div>
+        <p class="eyebrow">Books</p>
+        <h2>Read and reflect</h2>
+        <p>Written reflections and free journals to help you live your faith day by day.</p>
+        <a class="more" href="#">Read &rarr;</a>
+      </div>
+
+      <div class="card">
+        <div class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="2" width="6" height="12" rx="3"/>
+            <path d="M5 11a7 7 0 0 0 14 0"/>
+            <line x1="12" y1="18" x2="12" y2="22"/>
+          </svg>
+        </div>
+        <p class="eyebrow">Public talks</p>
+        <h2>Hear it live</h2>
+        <p>Talks and lectures for communities, in person and online, on the core concepts of Islam.</p>
+        <a class="more" href="#">Listen &rarr;</a>
+      </div>
+
+    </section>
+
+    <!-- The blog is the main content of the page -->
+    <section class="blog" id="blog">
+      <div class="blog-head">
+        <div class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 20h4L19 9l-4-4L4 16z"/>
+            <line x1="13" y1="7" x2="17" y2="11"/>
+          </svg>
+        </div>
+        <h2>The Blog</h2>
+      </div>
+
+      <article class="post">
+        <div class="date">November 2026</div>
+        <h3><a href="#">Creatures Who Can Choose</a></h3>
+        <p>A reflection on the freedom we have, and the map we have been given.</p>
+      </article>
+
+      <article class="post">
+        <div class="date">October 2026</div>
+        <h3><a href="#">Money Is Just Numbers</a></h3>
+        <p>How we see our wealth, and what it becomes when we spend it for Allah.</p>
+      </article>
+
+      <article class="post">
+        <div class="date">October 2026</div>
+        <h3><a href="#">Normal Body, Not Nobody</a></h3>
+        <p>Looking posh, feeling small, and the humility of a grateful heart.</p>
+      </article>
+    </section>
+
+    <section class="signup" id="newsletter">
+      <h2>Get the weekly reflection by email</h2>
+      <p>One reflection on a core concept of Islam, every week. No jargon. Unsubscribe at any time.</p>
+      <!-- Replace the action below with your Substack subscribe link or embed code. -->
+      <form action="#" method="post" onsubmit="return false;">
+        <input type="email" name="email" placeholder="Your email address" required aria-label="Email address">
+        <button type="submit">Subscribe</button>
+      </form>
+    </section>
+
+  </main>
+
+  <footer class="site">
+    Rashada. Teachings for a connected world.
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var btn = document.getElementById('themeToggle');
+    var systemDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+    function isDark() {
+      var explicit = root.getAttribute('data-theme');
+      if (explicit) return explicit === 'dark';
+      return systemDark.matches;
+    }
+
+    function render() {
+      btn.textContent = isDark() ? 'Light' : 'Dark';
+    }
+
+    btn.addEventListener('click', function () {
+      root.setAttribute('data-theme', isDark() ? 'light' : 'dark');
+      render();
+    });
+
+    systemDark.addEventListener('change', render);
+    render();
+  })();
+</script>
+
+</body>
+</html>
